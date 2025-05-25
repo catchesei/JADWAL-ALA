@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Kawaii Jadwal Anti-Ngebug! 🌸💖</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&family=Nunito:wght@400;700&display=swap');
+        body {
+            font-family: 'Nunito', sans-serif;
+        }
+        .cute-font {
+            font-family: 'Comfortaa', cursive;
+        }
+        .tab-button {
+            transition: all 0.3s ease;
+        }
+        .tab-button.active {
+            background-color: #DDA0DD; /* Adjusted purple-300 for a slightly warmer tone */
+            color: #4A004A; /* Darker purple */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+        .tab-button:hover:not(.active) {
+            background-color: #E0BBE4; /* Light purple for hover */
+            color: #6C006C; /* Slightly darker hover text */
+            transform: translateY(-1px);
+        }
+        .table-container {
+            max-height: 65vh; /* Sedikit lebih tinggi untuk vibe anime */
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: #DDA0DD #F3E5F5; /* thumb and track color */
+        }
+        /* Custom scrollbar for webkit browsers */
+        .table-container::-webkit-scrollbar {
+            width: 10px;
+        }
+        .table-container::-webkit-scrollbar-track {
+            background: #F3E5F5; /* Light pink background */
+            border-radius: 10px;
+        }
+        .table-container::-webkit-scrollbar-thumb {
+            background: #DDA0DD; /* Pastel purple for thumb */
+            border-radius: 10px;
+            border: 2px solid #F3E5F5; /* Border to match track */
+        }
+        .table-container::-webkit-scrollbar-thumb:hover {
+            background: #BE9EC9; /* Slightly darker purple on hover */
+        }
+        .table-header-bg {
+            background-color: #D4EDF7; /* Light blue for table headers */
+        }
+    </style>
+</head>
+<body class="bg-pink-50 text-gray-800 min-h-screen flex flex-col items-center py-8 px-4">
+
+    <div class="container mx-auto w-full max-w-4xl bg-white p-6 sm:p-8 rounded-3xl shadow-xl border-4 border-dashed border-purple-200">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl sm:text-5xl font-bold cute-font text-purple-600 mb-3 drop-shadow-md">
+                🌸 My Kawaii JADWAL Anti-Ngebug! 💖
+            </h1>
+            <p class="mt-3 text-gray-700 text-sm sm:text-base leading-relaxed">
+                Konnichiwa, minna-san! 👋 Selamat datang di buku harian jadwal impianku! Ini bukan cuma jadwal biasa, lho~ Ini adalah *magic spell* biar cuan ngalir deres tapi otak kita tetep *fresh* kayak bunga sakura di pagi hari. Yuk, kepoin jadwal harian dan mingguan yang super kawaii ini biar harimu makin berkah dan impianmu tercapai! **Ganbatte!** ✨
+            </p>
+        </header>
+
+        <nav class="mb-8">
+            <div class="flex flex-col sm:flex-row justify-center space-y-2 sm:space-y-0 sm:space-x-3 md:space-x-4">
+                <button id="btn-senin-kamis" class="tab-button active w-full sm:w-auto text-sm sm:text-base font-medium py-3 px-6 rounded-full bg-blue-100 text-blue-700 hover:bg-purple-200 hover:text-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 focus:ring-opacity-50 drop-shadow-sm">
+                    ✨ Daily Routine Ganbatte! ✨
+                </button>
+                <button id="btn-jumat" class="tab-button w-full sm:w-auto text-sm sm:text-base font-medium py-3 px-6 rounded-full bg-blue-100 text-blue-700 hover:bg-purple-200 hover:text-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 focus:ring-opacity-50 drop-shadow-sm">
+                    🥳 Otw Weekend Senpai! 🥳
+                </button>
+                <button id="btn-sabtu-minggu" class="tab-button w-full sm:w-auto text-sm sm:text-base font-medium py-3 px-6 rounded-full bg-blue-100 text-blue-700 hover:bg-purple-200 hover:text-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 focus:ring-opacity-50 drop-shadow-sm">
+                    🎉 Full Power! Ittekimasu! 🎉
+                </button>
+            </div>
+        </nav>
+
+        <main id="schedule-content" class="mb-8">
+            <div id="content-senin-kamis" class="schedule-period">
+                <h2 class="text-2xl sm:text-3xl font-semibold cute-font text-purple-700 mb-4 text-center">Jadwal Senin – Kamis: Ayo Semangat!</h2>
+                <div class="table-container shadow-lg rounded-xl border border-blue-200">
+                    <table class="min-w-full divide-y divide-purple-100">
+                        <thead class="table-header-bg sticky top-0 rounded-t-xl">
+                            <tr>
+                                <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs sm:text-sm font-medium text-blue-800 uppercase tracking-wider rounded-tl-xl">Waktu ⏰</th>
+                                <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs sm:text-sm font-medium text-blue-800 uppercase tracking-wider rounded-tr-xl">Kegiatan 🌟</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body-senin-kamis" class="bg-white divide-y divide-purple-50">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="content-jumat" class="schedule-period hidden">
+                <h2 class="text-2xl sm:text-3xl font-semibold cute-font text-purple-700 mb-4 text-center">Jadwal Jumat: Selamat Datang Weekend!</h2>
+                 <div class="table-container shadow-lg rounded-xl border border-blue-200">
+                    <table class="min-w-full divide-y divide-purple-100">
+                        <thead class="table-header-bg sticky top-0">
+                            <tr>
+                                <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs sm:text-sm font-medium text-blue-800 uppercase tracking-wider">Waktu ⏰</th>
+                                <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs sm:text-sm font-medium text-blue-800 uppercase tracking-wider">Kegiatan 🌟</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body-jumat" class="bg-white divide-y divide-purple-50">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="content-sabtu-minggu" class="schedule-period hidden">
+                <h2 class="text-2xl sm:text-3xl font-semibold cute-font text-purple-700 mb-4 text-center">Jadwal Sabtu – Minggu: Full Power!</h2>
+                 <div class="table-container shadow-lg rounded-xl border border-blue-200">
+                    <table class="min-w-full divide-y divide-purple-100">
+                        <thead class="table-header-bg sticky top-0">
+                            <tr>
+                                <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs sm:text-sm font-medium text-blue-800 uppercase tracking-wider">Waktu ⏰</th>
+                                <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs sm:text-sm font-medium text-blue-800 uppercase tracking-wider">Kegiatan 🌟</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body-sabtu-minggu" class="bg-white divide-y divide-purple-50">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+
+        <section id="notes-section" class="bg-purple-50 p-4 sm:p-6 rounded-2xl shadow-md border-2 border-dashed border-purple-300">
+            <h3 class="text-xl sm:text-2xl font-semibold cute-font text-purple-700 mb-3 text-center">📝 Tips Rahasia dari Aku!</h3>
+            <ul id="notes-list" class="list-disc list-inside text-gray-700 space-y-2 text-sm sm:text-base">
+            </ul>
+        </section>
+
+        <footer class="text-center mt-10 pt-6 border-t border-purple-100">
+            <p class="text-xs sm:text-sm text-gray-500">© 2024 My Kawaii Jadwal. Dibuat dengan ✨ cinta ✨ untukmu!</p>
+        </footer>
+    </div>
+
+    <script>
+        const schedules = {
+            'senin-kamis': [
+                { time: '04.00 - 05.30', activity: 'Pagi-pagi Semangat! Bangun, sholat subuh, siap-siap biar kawaii seharian! 💖' },
+                { time: '05.30 - 06.45', activity: 'Sarapan enak / Persiapan OTW 🎒' },
+                { time: '07.00 - 16.00', activity: 'Magang Time! 💼 (Istirahat makan siang jam 12, biar ga nge-bug!) 🍜' },
+                { time: '16.00 - 16.30', activity: 'Pulang, Mandi, Ngemil Manja 🚿🍪' },
+                { time: '16.30 - 17.00', activity: 'Belajar Bahasa (30 menit, biar makin jago!) 📖' },
+                { time: '17.00 - 18.00', activity: 'Makan Malam + Sholat Maghrib (Healing perut & hati!) 🍛🛐' },
+                { time: '18.00 - 19.00', activity: 'Nge-update CV / Nge-scroll LinkedIn cari freelance / spill skill 💌' },
+                { time: '19.00 - 19.30', activity: 'Ngulik Writer / Baca Manga Edukasi (Psikologi/Sosial) 📖📝' },
+                { time: '19.30 - 20.00', activity: 'Sholat Isya + Minum Teh Hangat (Waktunya tenang!) 🍵✨' },
+                { time: '20.00 - 21.00', activity: 'Latihan Portfolio (Design / Artikel / Project) 🎨💻' },
+                { time: '21.00 - Fleksibel', activity: 'Waktunya Recharge Energi! 😴 Sayonara~ 🛌' }
+            ],
+            'jumat': [
+                { time: '04.00 - 05.30', activity: 'Pagi-pagi Semangat! Bangun, sholat subuh, siap-siap! 💖' },
+                { time: '05.30 - 06.45', activity: 'Sarapan / Beres-beres Kece 😎' },
+                { time: '07.00 - 16.30', activity: 'Magang Time! 💼✨' },
+                { time: '16.30 - 17.00', activity: 'Pulang, Mandi, Ngemil Manja 🚿🍪' },
+                { time: '17.00 - 18.00', activity: 'Makan Malam + Sholat Maghrib (Dah siap healing!) 🍛🛐' },
+                { time: '18.00 - 19.00', activity: 'Nge-grind Cari Peluang Freelance / Update Portfolio 📄' },
+                { time: '19.00 - 20.00', activity: 'Writer Mode On! / Psikologi Sosial Research (Seru!) 📖' },
+                { time: '20.00 - 21.00', activity: 'Planning Weekend Anti Gabut + Sholat Isya 📓🛐' },
+                { time: '21.00 - Fleksibel', activity: 'Tidur Cantik / Lanjut Kerja Kalo Mood Lagi On! 📱💻' }
+            ],
+            'sabtu-minggu': [
+                { time: '04.00 - 05.30', activity: 'Pagi Hari Semangat! Sholat Subuh + Journaling Ringan ✍️✨' },
+                { time: '05.30 - 06.30', activity: 'Belajar Bahasa / Baca Manga Edukasi (Psikologi Sosial) 📖' },
+                { time: '06.30 - 07.30', activity: 'Nulis Artikel / Ngulik Writer (Asah skill!) ✍️' },
+                { time: '07.30 - 08.30', activity: 'Sarapan Kenyang / Stretching Ringan Biar Fresh! 🍽️🧘‍♂️' },
+                { time: '08.30 - 10.00', activity: 'Laporan Magang (Biar cepet kelar!) 📑' },
+                { time: '10.00 - 11.00', activity: 'Latihan Portfolio / Project Freelance (Gas cuan!) 🎨💻' },
+                { time: '11.00 - 12.00', activity: 'Cari & Apply Kerja / Freelance (Yuk, jemput rezeki!) 💌' },
+                { time: '12.00 - 13.00', activity: 'Makan Siang + Sholat (Perut kenyang, hati senang!)' },
+                { time: '13.00 - 14.00', activity: 'Writer Mode On! / Artikel Riset / Bikin Video Edukasi (Kreatif!) 🎥' },
+                { time: '14.00 - 15.00', activity: 'Update CV, LinkedIn, Portfolio (Biar makin dilirik!) 📄' },
+                { time: '15.00 - 16.00', activity: 'Belajar Bahasa / Psikologi Santai (Tetap produktif!) 📚' },
+                { time: '16.00 - 17.00', activity: 'Sholat + Ngemil Asyik 🍪' },
+                { time: '17.00 - 18.00', activity: 'Review Progress Mingguan (Lihat seberapa keren kamu!) 📈' },
+                { time: '18.00 - 19.00', activity: 'Makan Malam + Sholat Maghrib (Yummy!)' },
+                { time: '19.00 - 21.00', activity: 'Free Time Produktif (Baca artikel seru, research kerja luar negeri, nulis ide project gila!) 💡' },
+                { time: '21.00 - Fleksibel', activity: 'Waktunya Tidur Nyenyak! 🛌' }
+            ]
+        };
+
+        const notesData = [
+            "Weekday: Malamnya Gas Produktif! 💻🌟",
+            "Weekend: Full Power dari pagi sampe malam, tapi sholat & makan tetep nomor satu! 🛐🍜",
+            "Anti Gabut: Chill itu Productive Leisure, biar otak makin jernih! 🌿💫"
+        ];
+
+        function populateTable(periodKey, tableBodyId) {
+            const tableBody = document.getElementById(tableBodyId);
+            tableBody.innerHTML = '';
+            schedules[periodKey].forEach(item => {
+                const row = tableBody.insertRow();
+                const cellTime = row.insertCell();
+                const cellActivity = row.insertCell();
+                cellTime.textContent = item.time;
+                cellActivity.textContent = item.activity;
+                cellTime.className = 'px-4 sm:px-6 py-4 whitespace-nowrap text-sm sm:text-base text-gray-500 border-b border-purple-50';
+                cellActivity.className = 'px-4 sm:px-6 py-4 text-sm sm:text-base text-gray-700 border-b border-purple-50';
+            });
+        }
+
+        function populateNotes() {
+            const notesList = document.getElementById('notes-list');
+            notesList.innerHTML = '';
+            notesData.forEach(note => {
+                const listItem = document.createElement('li');
+                listItem.textContent = note;
+                listItem.className = 'text-gray-700';
+                notesList.appendChild(listItem);
+            });
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            populateTable('senin-kamis', 'table-body-senin-kamis');
+            populateTable('jumat', 'table-body-jumat');
+            populateTable('sabtu-minggu', 'table-body-sabtu-minggu');
+            populateNotes();
+
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const schedulePeriods = document.querySelectorAll('.schedule-period');
+
+            function switchTab(activeButtonId, activeContentId) {
+                tabButtons.forEach(button => {
+                    button.classList.remove('active');
+                });
+                document.getElementById(activeButtonId).classList.add('active');
+                
+                schedulePeriods.forEach(period => {
+                    period.classList.add('hidden');
+                });
+                document.getElementById(activeContentId).classList.remove('hidden');
+            }
+
+            document.getElementById('btn-senin-kamis').addEventListener('click', () => {
+                switchTab('btn-senin-kamis', 'content-senin-kamis');
+            });
+            document.getElementById('btn-jumat').addEventListener('click', () => {
+                switchTab('btn-jumat', 'content-jumat');
+            });
+            document.getElementById('btn-sabtu-minggu').addEventListener('click', () => {
+                switchTab('btn-sabtu-minggu', 'content-sabtu-minggu');
+            });
+
+            // Initialize with the first tab active
+            switchTab('btn-senin-kamis', 'content-senin-kamis');
+        });
+    </script>
+</body>
+</html>
